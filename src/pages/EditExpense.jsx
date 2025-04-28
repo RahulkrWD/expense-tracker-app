@@ -13,25 +13,19 @@ function EditExpense() {
   const filterData = data.find((expense) => expense.id == id);
 
   const [formData, setFormData] = useState({
-    amount: filterData?.amount || "",
-    category: filterData?.category || "",
-    description: filterData?.description || "",
+    amount: filterData.amount,
+    category: filterData.category,
+    description: filterData.description,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...filterData, [name]: value });
+    setFormData({ ...formData, [name]: value, id: id });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      update_data({
-        id: id,
-        updatedExpense: formData,
-      })
-    );
-
+    dispatch(update_data(formData));
     navigate("/");
   };
 

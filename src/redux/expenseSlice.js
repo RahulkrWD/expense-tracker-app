@@ -33,10 +33,10 @@ const expenseSlice = createSlice({
     },
 
     update_data: (state, action) => {
-      const { id, updadeExpense } = action.payload;
-      state.data = state.data.map((expense) =>
-        expense.id == id ? { ...expense, ...updadeExpense } : expense
+      const index = state.data.findIndex(
+        (item) => item.id === action.payload.id
       );
+      state.data[index] = action.payload;
     },
   },
 });
